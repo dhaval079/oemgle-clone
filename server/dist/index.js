@@ -15,6 +15,9 @@ const io = new socket_io_1.Server(server, {
     }
 });
 const userManager = new UserManager_1.UserManager();
+app.get("/", (req, res) => {
+    res.send("Server is Running");
+});
 io.on('connection', (socket) => {
     console.log('a user connected');
     userManager.addUser("randomName", socket);
