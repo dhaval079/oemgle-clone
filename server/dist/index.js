@@ -11,7 +11,7 @@ const app = express();
 const server = http_1.default.createServer(http_1.default);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: "*"
+        origin: "https://oemgle-clone.vercel.app/"
     }
 });
 const userManager = new UserManager_1.UserManager();
