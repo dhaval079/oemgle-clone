@@ -11,13 +11,15 @@ const app = express();
 const server = http_1.default.createServer(http_1.default);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: "https://oemgle-clone.vercel.app/"
+        origin: "https://oemgle-clone.vercel.app"
     }
 });
-const userManager = new UserManager_1.UserManager();
+
 app.get("/", (req, res) => {
-    res.send("Server is Running");
+    res.send("Server is running");
 });
+
+const userManager = new UserManager_1.UserManager();
 io.on('connection', (socket) => {
     console.log('a user connected');
     userManager.addUser("randomName", socket);
@@ -26,6 +28,7 @@ io.on('connection', (socket) => {
         userManager.removeUser(socket.id);
     });
 });
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+const PORT = process.env.PORT || 5000; // Use the provided port or default to 5000
+server.listen(PORT, () => {
+    console.log(`listening on port :  ${PORT}`);
 });

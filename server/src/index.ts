@@ -10,7 +10,7 @@ const server = http.createServer(http);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://oemgle-clone.vercel.app/"
+    origin: "https://oemgle-clone.vercel.app"
   }
 });
 
@@ -25,6 +25,8 @@ io.on('connection', (socket: Socket) => {
   })
 });
 
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+const PORT = process.env.PORT || 5000; // Use the provided port or default to 5000
+
+server.listen(PORT, () => {
+    console.log(`listening on port :  ${PORT}`);
 });
