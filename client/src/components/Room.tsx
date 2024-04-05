@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { LegacyRef, RefObject, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
 
-const URL = "https://oemgle-clone-1.onrender.com/";
+const URL = "http://localhost:3000";
 
 export const Room = ({
     name,
@@ -82,7 +82,9 @@ export const Room = ({
             setRemoteMediaStream(stream);
             // trickle ice 
             setReceivingPc(pc);
+            // @ts-ignore
             window.pcr = pc;
+            // @ts-ignore
             pc.ontrack = (e) => {
                 alert("ontrack");
                 // console.error("inside ontrack");
@@ -147,7 +149,7 @@ export const Room = ({
                 // //@ts-ignore
             }, 5000)
         });
-
+        // @ts-ignore
         socket.on("answer", ({roomId, sdp: remoteSdp}) => {
             setLobby(false);
             setSendingPc(pc => {
@@ -201,9 +203,11 @@ export const Room = ({
 
     return <div>
         Hi {name}
-        <video autoPlay width={400} height={400} ref={localVideoRef} />
+        // @ts-ignore : 'ref'
+        <video autoPlay width={400} height={400} ref={localVideoRef as LegacyRef<HTMLVideoElement> | undefined} />
         {lobby ? "Waiting to connect you to someone" : null}
-        <video autoPlay width={400} height={400} ref={remoteVideoRef} />
+        // @ts-ignore
+        <video autoPlay width={400} height={400} ref={remoteVideoRef as RefObject<HTMLVideoElement> | null} />
     </div>
 }
 
