@@ -2,7 +2,7 @@ import { LegacyRef, RefObject, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
 
-const URL = "http://localhost:3000";
+const URL = "https://oemgle-clone-1.onrender.com/";
 
 export const Room = ({
     name,
